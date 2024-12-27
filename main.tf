@@ -21,7 +21,7 @@ resource "azurerm_role_assignment" "secret_officer_role" {
   for_each = var.bot_configurations
 
   # Assign the Secret Officer role to the Azure AD group for each secret
-  principal_id       = each.value.ad_group_object_id
+  principal_id       = each.value.ad_group_objectid
   role_definition_name = "Key Vault Secrets Officer"  # Secret Officer role grants create, update, and delete permissions on secrets
   scope              = "${data.azurerm_key_vault.keyvault.id}/secrets/${azurerm_key_vault_secret.secret[each.key].name}"  # Assign to specific secret
 }
